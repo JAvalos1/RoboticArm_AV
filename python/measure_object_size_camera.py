@@ -69,9 +69,11 @@ while True:
         box = cv2.boxPoints(rect)
         box = np.int0(box)
 
+        area = cv2.contourArea(cnt)
+
         cv2.circle(img, (int(x), int(y)), 5, (0, 0, 255), -1)
         cv2.polylines(img, [box], True, (255, 0, 0), 2)
-        cv2.putText(img, "Area {}".format(round(w*h, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
+        cv2.putText(img, "Area {}".format(round(area, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
 
     cv2.imshow("Image", img)
     key = cv2.waitKey(1)
