@@ -26,6 +26,5 @@ class HomogeneousBgDetector():
 
         return objects_contours
 
-    # def get_objects_rect(self):
-    #     box = cv2.boxPoints(rect)  # cv2.boxPoints(rect) for OpenCV 3.x
-    #     box = np.int0(box)
+# Se utiliza esta clase tanto para identificar los objetos dentro de la imagen como para suprimir 
+# el fondo en caso de que el area de este sea mayor a un cierto valor 
