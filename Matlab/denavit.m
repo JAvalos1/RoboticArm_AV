@@ -16,6 +16,7 @@ else
     cosalfa=cos(alfa);
     sinalfa=sin(alfa);
 end
+
 dh=[cos(teta)  -cosalfa*sin(teta)   sinalfa*sin(teta)   a*cos(teta);
     sin(teta)   cosalfa*cos(teta)  -sinalfa*cos(teta)   a*sin(teta);
            0              sinalfa             cosalfa             d;
