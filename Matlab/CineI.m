@@ -32,8 +32,8 @@ qlim=robot.qlim;
 a1=d_dh(1);
 a2=a_dh(1);
 a3=abs(a_dh(2));
-a4=a_dh(3);
-a5=abs(d_dh(5));
+a4=d_dh(4);
+a5=abs(a_dh(5));
 
 %*** Obtencion de Pm
 pm=p-a5*a;
@@ -377,16 +377,16 @@ for i=1:length(q1)
                 DH(q1(i)+offset_dh(1),d_dh(1),a_dh(1),alpha_dh(1))*...
                 DH(q2(j)+offset_dh(2),d_dh(2),a_dh(2),alpha_dh(2))*...
                 DH(q3(k)+offset_dh(3),d_dh(3),a_dh(3),alpha_dh(3));
-            %A34=DH(0+offset_dh(4),d_dh(4),a_dh(4),alpha_dh(4));
-            A04=A03;%*A34;
+            A34=DH(0+offset_dh(4),d_dh(4),a_dh(4),alpha_dh(4));
+            A04=A03*A34;
 %              pos=deg([q1(i) q2(j) q3(k)])
             if isequal(round(A04(1:3,4),3),round(pm,3))
 
 %--------------Obtención de q4 q5 -----------------------------------------
                 Raux=(A03(1:3,1:3))\MTH(1:3,1:3);        %Ecuacion 3.3.1
-                q5p=atan(Raux(3,1)/Raux(3,2));                     %Ecuacion 3.3.3
+                q5p=atan(Raux(3,2)/-Raux(3,1));                     %Ecuacion 3.3.3
                 
-                q4p=atan(Raux(2,3)/Raux(1,3));         %Ecuacion 3.3.5
+                q4p=atan(Raux(1,2)/Raux(2,2));         %Ecuacion 3.3.5
                 
 
 
@@ -484,3 +484,7 @@ band=0;
          end
      end
 end
+
+
+%% Una de las posiciones : [pi/4 -pi/4 pi/4 -pi/2 0]
+%% ESTE [-0.7854   -0.8029    0.7959   -1.5428   -0.7854]

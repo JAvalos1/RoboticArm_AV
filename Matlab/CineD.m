@@ -9,7 +9,7 @@
 % #->Correo: javalos@fiuna.edu.py
 % #-----------------------------------------------------------------------#
 
-function [MTH rii]=CineD(robot,q)
+function [MTH]=CineD(robot,q)
 qlim=robot.qlim;
     
     if q(1)<qlim(1,1) || q(1)>qlim(1,2)
@@ -32,5 +32,5 @@ MTH=eye(4);
 for i=1:5
         MTH=MTH*DH(theta(i),d(i),a(i),alpha(i));
 end
-
+MTH=MTH*[roty(-pi/2)*rotz(-pi/2) [0 0 0]';[0 0 0 1]];
 end

@@ -16,94 +16,94 @@ String dataIn = "";
 void setup() {
   Serial.begin(9600);
   //SETEAR POSICIONES DE CINTA Y DE LA BARRA PARA ENTREGAR PRODUCTOS, yo guarde en 40 la barra y en 41 la cinta
-          s1SP[40] =170;
+          /*s1SP[40] =170;
           s2SP[40] =70;
           s3SP[40] =80;
           s4SP[40] =90;
           s5SP[40] =70;
-          s6SP[40] =90;
+          //s6SP[40] =90;
           //cinta
           s1SP[41] =0;
           s2SP[41] =60;
           s3SP[41] =80;
           s4SP[41] =90;
           s5SP[41] =70;
-          s6SP[41] =90; 
+          //s6SP[41] =90; */
           //para el rack uno  
           s1SP[0] =80;
           s2SP[0] =120;
           s3SP[0] =90;
           s4SP[0] =90;
           s5SP[0] =90;
-          s6SP[0] =90;    
+          //s6SP[0] =90;    
           //1
           s1SP[1] =80;
           s2SP[1] =110;
           s3SP[1] =90;
           s4SP[1] =90;
           s5SP[1] =95;
-          s6SP[1] =90;  
+          //s6SP[1] =90;  
           //2
           s1SP[2] =80;
           s2SP[2] =110;
           s3SP[2] =90;
           s4SP[2] =90;
           s5SP[2] =95;
-          s6SP[2] =0;  
+          //s6SP[2] =0;  
           //3
           s1SP[3] =80;
           s2SP[3] =130;
           s3SP[3] =110;
           s4SP[3] =90;
           s5SP[3] =95;
-          s6SP[3] =0;    
+          //s6SP[3] =0;    
           //4
           s1SP[4] =80;
           s2SP[4] =150;
           s3SP[4] =120;
           s4SP[4] =90;
           s5SP[4] =95;
-          s6SP[4] =0;  
+          //s6SP[4] =0;  
           //5
           s1SP[5] =80;
           s2SP[5] =150;
           s3SP[5] =120;
           s4SP[5] =90;
           s5SP[5] =95;
-          s6SP[5] =0;
+          //s6SP[5] =0;
           //6
           s1SP[6] =170;
           s2SP[6] =150;
           s3SP[6] =120;
           s4SP[6] =90;
           s5SP[6] =95;
-          s6SP[6] =0;  
+          //s6SP[6] =0;  
           //7
           s1SP[7] =170;
           s2SP[7] =70;
           s3SP[7] =80;
           s4SP[7] =90;
           s5SP[7] =70;
-          s6SP[7] =90;    
-  servo01.attach(2);
-  servo02.attach(4);
+          //s6SP[7] =90;    
+  servo01.attach(3);
+  servo02.attach(5);
   servo03.attach(6);
-  servo04.attach(8);
+  servo04.attach(9);
   servo05.attach(10);
-  servo06.attach(12);
+  servo06.attach(11);
   delay(20);
   // Robot arm initial position
-  servo1PPos = 170;
+  servo1PPos = 90;
   servo01.write(servo1PPos);
-  servo2PPos = 70;
+  servo2PPos = 100;
   servo02.write(servo2PPos);
-  servo3PPos = 80;
+  servo3PPos = 95;
   servo03.write(servo3PPos);
   servo4PPos = 90;
   servo04.write(servo4PPos);
-  servo5PPos = 70;
+  servo5PPos = 80;
   servo05.write(servo5PPos);
-  servo6PPos = 90;
+  servo6PPos = 180;
   servo06.write(servo6PPos);
 }
 void loop() {
@@ -121,17 +121,18 @@ void loop() {
       if (servo1PPos > servo1Pos) {
         for ( int j = servo1PPos; j >= servo1Pos; j--) {   // Run servo down
           servo01.write(j);
-          delay(10);    // defines the speed at which the servo rotates
+          delay(30);    // defines the speed at which the servo rotates
         }
       }
       // If previous position is smaller then current position
       if (servo1PPos < servo1Pos) {
         for ( int j = servo1PPos; j <= servo1Pos; j++) {   // Run servo up
           servo01.write(j);
-          delay(10);
+          delay(30);
         }
       }
       servo1PPos = servo1Pos;   // set current position as previous position
+      Serial.println("Completado");
     }
     
     // Move Servo 2
@@ -142,16 +143,17 @@ void loop() {
       if (servo2PPos > servo2Pos) {
         for ( int j = servo2PPos; j >= servo2Pos; j--) {
           servo02.write(j);
-          delay(10);
+          delay(30);
         }
       }
       if (servo2PPos < servo2Pos) {
         for ( int j = servo2PPos; j <= servo2Pos; j++) {
           servo02.write(j);
-          delay(10);
+          delay(30);
         }
       }
       servo2PPos = servo2Pos;
+      Serial.println("Completado");
     }
     // Move Servo 3
     if (dataIn.startsWith("s3")) {
@@ -161,16 +163,17 @@ void loop() {
       if (servo3PPos > servo3Pos) {
         for ( int j = servo3PPos; j >= servo3Pos; j--) {
           servo03.write(j);
-          delay(10);
+          delay(30);
         }
       }
       if (servo3PPos < servo3Pos) {
         for ( int j = servo3PPos; j <= servo3Pos; j++) {
           servo03.write(j);
-          delay(10);
+          delay(30);
         }
       }
       servo3PPos = servo3Pos;
+      Serial.println("Completado");
     }
     // Move Servo 4
     if (dataIn.startsWith("s4")) {
@@ -190,6 +193,7 @@ void loop() {
         }
       }
       servo4PPos = servo4Pos;
+      Serial.println("Completado");
     }
     // Move Servo 5
     if (dataIn.startsWith("s5")) {
@@ -199,16 +203,17 @@ void loop() {
       if (servo5PPos > servo5Pos) {
         for ( int j = servo5PPos; j >= servo5Pos; j--) {
           servo05.write(j);
-          delay(10);
+          delay(20);
         }
       }
       if (servo5PPos < servo5Pos) {
         for ( int j = servo5PPos; j <= servo5Pos; j++) {
           servo05.write(j);
-          delay(10);
+          delay(20);
         }
       }
       servo5PPos = servo5Pos;
+      Serial.println("Completado");
     }
     // Move Servo 6
     if (dataIn.startsWith("s6")) {
@@ -228,6 +233,19 @@ void loop() {
         }
       }
       servo6PPos = servo6Pos;
+      Serial.println("Completado");
+    }
+
+    if (dataIn.startsWith("pick")){
+      servo06.write(0);
+      delay(15);
+      Serial.println("Completado");
+    }
+
+    if (dataIn.startsWith("place")){
+      servo06.write(180);
+      delay(15);
+      Serial.println("Completado");
     }
 
     //TERMINA MOVIMIENTO DE LOS MOTORES, NO TOCAR ESTA PARTE 
