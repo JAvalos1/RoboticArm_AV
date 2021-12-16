@@ -2,25 +2,10 @@ import cv2
 from object_detector import *
 import numpy as np
 
-# Load Aruco detector
-parameters = cv2.aruco.DetectorParameters_create()
-aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
-
-
-# Load Object Detector
-detector = HomogeneousBgDetector()
-
-# Load Cap
-#cap = cv2.VideoCapture(0)
-url = 'http://192.168.0.6:8080/video'
-cap = cv2.VideoCapture(url)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-
-while True:
+def Vision():
     _, img = cap.read()
 
-    # Get Aruco marker
+        # Get Aruco marker
     corners, _, _ = cv2.aruco.detectMarkers(img, aruco_dict, parameters=parameters)
     if corners:
 
@@ -50,10 +35,11 @@ while True:
             box = cv2.boxPoints(rect)
             box = np.int0(box)
 
+            area = cv2.contourArea(cnt)
+
             cv2.circle(img, (int(x), int(y)), 5, (0, 0, 255), -1)
             cv2.polylines(img, [box], True, (255, 0, 0), 2)
-            cv2.putText(img, "Width {} cm".format(round(object_width, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
-            cv2.putText(img, "Height {} cm".format(round(object_height, 1)), (int(x - 100), int(y + 15)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
+            cv2.putText(img, "Area {}".format(round(area, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
 
     contours = detector.detect_objects(img)
 
@@ -75,10 +61,40 @@ while True:
         cv2.polylines(img, [box], True, (255, 0, 0), 2)
         cv2.putText(img, "Area {}".format(round(area, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
 
+        ############################################################################################################################
+        #Ref1  area de la caja del tamanho 1
+        #Ref2 area de la caja del tamanho 2
+        #if area-Ref1<area-Ref2  Significa que es mas aproximado a la caja 1
+        #   Colocar caja en contenedor 1
+        #   aumentar en 1 el contador para pasar a la siguiente posicion en contenedor1
+        #else
+        #   Colocar caja en contenedor 2
+        #   aumentar en 1 el otro contador de posiciones para esta caja
+        ############################################################################################################################
+
     cv2.imshow("Image", img)
+
+# Load Aruco detector
+parameters = cv2.aruco.DetectorParameters_create()
+aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
+
+
+# Load Object Detector
+detector = HomogeneousBgDetector()
+
+# Load Cap
+#cap = cv2.VideoCapture(0)
+url = 0#'http://192.168.0.6:8080/video'
+cap = cv2.VideoCapture(url)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+while True:
+    Vision()
     key = cv2.waitKey(1)
     if key == 27:
         break
+
 
 cap.release()
 cv2.destroyAllWindows()
