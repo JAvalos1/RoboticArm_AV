@@ -1,3 +1,16 @@
+
+#Control para un robot de 5 grados de libertad, tarea pick and place
+#Trabajo practico final
+#Materia: Robotica 1
+#Institucion: Facultad de Ingenieria UNA
+#Datos del Autor.
+#->Nombres: Julio Fabian
+#->Apellidos: Avalos Peralta
+#->C.I: 3877117
+#->Correo: javalos@fiuna.edu.py
+#Año: 2021
+
+
 import mysql.connector
 import serial, time
  
@@ -10,9 +23,9 @@ conexionMySQL = mysql.connector.connect(
 )
  
 #Aca podria ser un switch case
-Secuencia=['Pos0','Pos2','Pos1','pick','Pos2','Pos3','Pos4','place','Pos3','Pos0']
+Secuencia=['Pos2','Pos1','pick','Pos2','Pos3','Pos4','place','Pos3','Pos0']
 
-arduino = serial.Serial("COM5", 9600)
+arduino = serial.Serial("COM3", 9600)
 time.sleep(2)
 
 for i in Secuencia:
