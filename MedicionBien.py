@@ -13,7 +13,7 @@ detector = HomogeneousBgDetector()
 #Se carga la imagen
 #img = cv2.imread("phone_aruco_marker.jpg")
 #Se carga el video
-url = 'http://192.168.43.1:8080/video'
+url = 'http://192.168.0.6:8080/video'
 cap = cv2.VideoCapture(url)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 720)
